@@ -1,5 +1,6 @@
 tr{vertical-align:top;}
 td, th{padding:2px;margin:0px;}
+th{text-decoration:underline;}
 .Green td:nth-child(5){background-color:#008800;color:#fff;}
 .Amber td:nth-child(5){background-color:#EFA906;color:#fff;}
 .Red td:nth-child(5){background-color:#cc0033;color:#fff;}

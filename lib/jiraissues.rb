@@ -4,11 +4,12 @@ module Jiraissues
 
       command = "curl --cert ~/certstore/bbc.pem --cacert ~/certstore/ca.pem"
 
-      issue_list_url = "https://jira.dev.bbc.co.uk/sr/jira.issueviews:searchrequest-xml/temp/SearchRequest.xml?jqlQuery=project+%3D+PIPELINE+AND+%22Product+Area%22+%3D+%22Knowledge+and+Learning%22&tempMax=1000"
+      issue_list_xml_url = "https://jira.dev.bbc.co.uk/sr/jira.issueviews:searchrequest-xml/temp/SearchRequest.xml?jqlQuery=project+%3D+PIPELINE+AND+%22Product+Area%22+%3D+%22Knowledge+and+Learning%22&tempMax=1000"
+      issue_list_url = "https://jira.dev.bbc.co.uk/secure/IssueNavigator.jspa?reset=true&jqlQuery=project+%3D+PIPELINE+ORDER+BY+status+DESC%2C+priority+DESC"
 
-      puts "getting url \n #{issue_list_url}"
+      puts "getting url \n #{issue_list_xml_url}"
 
-      xml_feed = %x{#{command} #{issue_list_url}}
+      xml_feed = %x{#{command} #{issue_list_xml_url}}
       #xml_feed = "/Users/adamsr03/github/local/Knowlearn-AppDashboard/data/pipeline.xml"
       xml_obj = XmlSimple.xml_in(xml_feed)
 
@@ -27,7 +28,7 @@ module Jiraissues
         keys.push issue
       end
 
-      keys
+      {:keys => keys, :url => issue_list_url}
 
     end
     
