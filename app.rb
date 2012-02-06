@@ -36,6 +36,7 @@ report = <<EOT
 		</script>
 </head>
 <body>
+<div id="wrapper">
 EOT
 filename = "output/pipeline-#{DateTime.now.strftime('%Y%m%d-%H%M')}.html"
 filename = "output/pipeline.html"
@@ -43,5 +44,5 @@ File.open(filename, 'w') do |f|
   report = report + "<h1>KandL Pipeline Update</h1>"
   f.write report
   f.write "<script>var issues_json = " + issue_list.to_json
-  f.write("</script></body></html>")
+  f.write("</script></div></body></html>")
 end

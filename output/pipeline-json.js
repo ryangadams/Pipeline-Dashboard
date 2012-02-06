@@ -23,8 +23,7 @@ function buildHTML(){
         }
         tableBody.append(el);
     });
-    $("body").append('<p><a href="' + issues_json.url + '">View List on JIRA</a></p>')
-    $("body").append(table);
+    $("#wrapper").append('<p><a href="' + issues_json.url + '">View List on JIRA</a></p>').append(table);
     addEvents();
 }
 function addEvents() {
