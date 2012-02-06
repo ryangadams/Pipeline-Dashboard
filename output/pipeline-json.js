@@ -1,6 +1,8 @@
 function buildHTML(){
     var table = $('<table id="project-table"></table>');
     table.append($('<thead><tr><th>KEY</th><th>SUMMARY</th><th id="status-header">STATUS</th><th>TPM</th><th>RAG</th><th>JIRA</th><th>CONFLUENCE</th></tr></thead>'));
+    var tableBody = $("<tbody></tbody>");
+    table.append(tableBody);
     $.each(issues_json, function(index, value){
         var el = $('<tr id="row_' + index + '" class="' + value.rag + ' ' + value.status + '">' +
         '<td><a href="https://jira.dev.bbc.co.uk/browse/' +value.key +'">' + value.key + '</a></td>' +
@@ -19,7 +21,7 @@ function buildHTML(){
         } else {
             el.append($('<td></td>'));
         }
-        table.append(el);
+        tableBody.append(el);
     });
     $("body").append(table);
     addEvents();
@@ -70,6 +72,7 @@ function addEvents() {
     });
     $("#project-table").tablesorter({
         textExtraction: "complex",
+        widgets: ['zebra'],
         headers: {
             0: {
                 sorter: 'jira_sorter'
