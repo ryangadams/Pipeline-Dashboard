@@ -6,7 +6,7 @@ function buildHTML(){
     $.each(issues_json, function(index, value){
         var el = $('<tr id="row_' + index + '" class="' + value.rag + ' ' + value.status + '">' +
         '<td><a href="https://jira.dev.bbc.co.uk/browse/' +value.key +'">' + value.key + '</a></td>' +
-        '<td>' + value.summary + '</td>' +
+        '<td class="summary">' + value.summary + '<span class="hidden">' + value.laststatus  + '</span></td>' +
         '<td>' + value.status + '</td>' +
         '<td>' + value.tpm + '</td>' +
         '<td>' + value.rag + '</td>' +
@@ -84,5 +84,8 @@ function addEvents() {
                 sorter: 'rag_sorter'
             }
         }
+    });
+    $("td.summary").click(function(){
+        $(this).toggleClass("show-snippet");
     }); 
 }

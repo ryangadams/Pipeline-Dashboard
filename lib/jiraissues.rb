@@ -21,7 +21,8 @@ module Jiraissues
           :rag => fetch_rag(item['customfields'][0]['customfield']),
           :jiraurl => fetch_jira_url(item['customfields'][0]['customfield']),
           :confluenceurl => fetch_confluence_url(item['customfields'][0]['customfield']),
-          :tpm => fetch_tpm(item['customfields'][0]['customfield'])
+          :tpm => fetch_tpm(item['customfields'][0]['customfield']),
+          :laststatus => fetch_last_status(item['customfields'][0]['customfield'])
         }
         keys.push issue
       end
@@ -32,6 +33,10 @@ module Jiraissues
     
     def Jiraissues.fetch_rag(customFieldArray) 
       fetch_field(customFieldArray, "customfield_10573")
+    end
+    
+    def Jiraissues.fetch_last_status(customFieldArray)
+      fetch_field(customFieldArray, "customfield_10435")
     end
     
     def Jiraissues.fetch_jira_url(customFieldArray)

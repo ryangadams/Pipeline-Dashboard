@@ -1,8 +1,12 @@
+tr{vertical-align:top;}
 td, th{padding:2px;margin:0px;}
 .Green td:nth-child(5){background-color:#008800;color:#fff;}
 .Amber td:nth-child(5){background-color:#EFA906;color:#fff;}
 .Red td:nth-child(5){background-color:#cc0033;color:#fff;}
 .Closed{text-decoration: line-through;}
-thead th:hover{cursor:pointer; background-color:#dedede;}
+thead th:hover, td.summary:hover{cursor:pointer; background-color:#dedede;}
 
 tr.even{background-color: #F0F0F6;}
+
+span.hidden{display:none;}
+.show-snippet span.hidden{display:block;margin:10px 2px;background:#fff;padding:10px;max-width:400px;}
