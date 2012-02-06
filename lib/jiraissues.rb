@@ -8,8 +8,8 @@ module Jiraissues
 
       puts "getting url \n #{issue_list_url}"
 
-      #xml_feed = %x{#{command} #{issue_list_url}}
-      xml_feed = "/Users/adamsr03/github/local/Knowlearn-AppDashboard/data/pipeline.xml"
+      xml_feed = %x{#{command} #{issue_list_url}}
+      #xml_feed = "/Users/adamsr03/github/local/Knowlearn-AppDashboard/data/pipeline.xml"
       xml_obj = XmlSimple.xml_in(xml_feed)
 
       keys = Array.new

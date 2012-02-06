@@ -7,7 +7,7 @@ require 'jiraissues'
 require 'date'
 require 'json'
 
-$debug = true
+$debug = false
 
 puts "Building KandL Pipeline Status"
 issue_list = Jiraissues.fetch_issues 
@@ -27,6 +27,7 @@ report = <<EOT
 	</style>
 	<link rel="stylesheet" href="default.css" />
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	<script type="text/javascript" src="jquery.tablesorter.min.js"></script>
 	<script type="text/javascript" src="pipeline-json.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
