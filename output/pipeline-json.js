@@ -1,6 +1,6 @@
 function buildHTML(){
     var table = $('<table id="project-table"></table>');
-    table.append($('<thead><tr><th>KEY</th><th>SUMMARY</th><th id="status-header">STATUS</th><th>TPM</th><th>RAG</th><th>JIRA</th><th>CONFLUENCE</th></tr></thead>'));
+    table.append($('<thead><tr><th>KEY</th><th>SUMMARY</th><th id="status-header">STATUS</th><th id="">LIFECYCLE</th><th>TPM</th><th>RAG</th><th>JIRA</th><th>CONFLUENCE</th></tr></thead>'));
     var tableBody = $("<tbody></tbody>");
     table.append(tableBody);
     $.each(issues_json.keys, function(index, value){
@@ -8,6 +8,7 @@ function buildHTML(){
         '<td><a href="https://jira.dev.bbc.co.uk/browse/' +value.key +'">' + value.key + '</a></td>' +
         '<td class="summary">' + value.summary + '<span class="hidden">' + value.laststatus  + '</span></td>' +
         '<td>' + value.status + '</td>' +
+        '<td>' + value.lifecycle + '</td>' +
         '<td>' + value.tpm + '</td>' +
         '<td>' + value.rag + '</td>' +
         '</tr>');
@@ -37,6 +38,21 @@ function addEvents() {
         format: function(s) { 
             // format your data for normalization 
             return s.toLowerCase().replace(/feasibility/,0).replace(/radar/,1).replace(/incubation/,2).replace(/development/,3).replace(/staging/,4).replace(/production under warranty/,5).replace(/on hold/,6).replace(/closed/,7); 
+        }, 
+        // set type, either numeric or text 
+        type: 'numeric' 
+    });
+    
+    $.tablesorter.addParser({ 
+        // set a unique id 
+        id: 'lifecycle_sorter', 
+        is: function(s) { 
+            // return false so this parser is not auto detected 
+            return false; 
+        }, 
+        format: function(s) { 
+            // format your data for normalization 
+            return s.toLowerCase().replace(/concept/,0).replace(/feasibility/,1).replace(/discovery/,2).replace(/build/,3).replace(/run/,4).replace(/^$/,5); 
         }, 
         // set type, either numeric or text 
         type: 'numeric' 
@@ -83,12 +99,20 @@ function addEvents() {
             2: {
                 sorter: 'status_sorter'
             },
-            4: {
+            3: {
+                sorter: 'lifecycle_sorter'
+            },
+            5: {
                 sorter: 'rag_sorter'
             }
         }
     });
     $("td.summary").click(function(){
         $(this).toggleClass("show-snippet");
-    }); 
+    });
+    $("#project-table").before($('<a id="toggle-closed-projects" href="#">Show/Hide Closed Projects</a>'));
+    $("#toggle-closed-projects").click(function(e){
+        e.preventDefault();
+        $("body").toggleClass("hide-closed");
+    }) 
 }

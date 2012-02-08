@@ -1,12 +1,14 @@
-#wrapper{width:90%;margin:0px auto;}
+#wrapper{width:95%;margin:0px auto;}
 table{margin:0px auto;}
 tr{vertical-align:top;}
 td, th{padding:2px;margin:0px;}
 th{text-decoration:underline;}
-.Green td:nth-child(5){background-color:#008800;color:#fff;}
-.Amber td:nth-child(5){background-color:#EFA906;color:#fff;}
-.Red td:nth-child(5){background-color:#cc0033;color:#fff;}
+.Green td:nth-child(6){background-color:#008800;color:#fff;}
+.Amber td:nth-child(6){background-color:#EFA906;color:#fff;}
+.Red td:nth-child(6){background-color:#cc0033;color:#fff;}
 .Closed{text-decoration: line-through;}
+
+.hide-closed .Closed{display:none;}
 thead th:hover, td.summary:hover{cursor:pointer; background-color:#dedede;}
 
 tr.even{background-color: #F0F0F6;}

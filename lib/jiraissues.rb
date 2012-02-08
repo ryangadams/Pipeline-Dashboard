@@ -23,13 +23,18 @@ module Jiraissues
           :jiraurl => fetch_jira_url(item['customfields'][0]['customfield']),
           :confluenceurl => fetch_confluence_url(item['customfields'][0]['customfield']),
           :tpm => fetch_tpm(item['customfields'][0]['customfield']),
-          :laststatus => fetch_last_status(item['customfields'][0]['customfield'])
+          :laststatus => fetch_last_status(item['customfields'][0]['customfield']),
+          :lifecycle => fetch_product_lifecycle(item['customfields'][0]['customfield'])
         }
         keys.push issue
       end
 
       {:keys => keys, :url => issue_list_url}
 
+    end
+    
+    def Jiraissues.fetch_product_lifecycle(customFieldArray) 
+      fetch_field(customFieldArray, "customfield_10570")
     end
     
     def Jiraissues.fetch_rag(customFieldArray) 
