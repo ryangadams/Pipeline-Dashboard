@@ -113,6 +113,11 @@ function addEvents() {
     $("#project-table").before($('<a id="toggle-closed-projects" href="#">Show/Hide Closed Projects</a>'));
     $("#toggle-closed-projects").click(function(e){
         e.preventDefault();
+        if($("body").hasClass("hide-closed")) {
+            $(this).text("Hide Closed Projects");
+        } else {
+            $(this).text("Show Closed Projects");
+        }
         $("body").toggleClass("hide-closed");
     }) 
 }
