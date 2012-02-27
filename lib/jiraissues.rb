@@ -1,16 +1,16 @@
 require 'xmlsimple'
 module Jiraissues
-    def Jiraissues.fetch_issues
+    def Jiraissues.fetch_issues(config_hash)
 
-      command = "curl --cert ~/certstore/bbc.pem --cacert ~/certstore/ca.pem"
+      command = "curl --cert #{config_hash['PERSONAL_PEM']} --cacert #{config_hash['CA_PEM']}"
 
-      issue_list_xml_url = "https://jira.dev.bbc.co.uk/sr/jira.issueviews:searchrequest-xml/temp/SearchRequest.xml?jqlQuery=project+%3D+PIPELINE+AND+%22Product+Area%22+%3D+%22Knowledge+and+Learning%22&tempMax=1000"
-      issue_list_url = "https://jira.dev.bbc.co.uk/secure/IssueNavigator.jspa?reset=true&jqlQuery=project+%3D+PIPELINE+ORDER+BY+status+DESC%2C+priority+DESC"
+      # append the querystring from the config onto the jira urls
+      issue_list_xml_url = "https://jira.dev.bbc.co.uk/sr/jira.issueviews:searchrequest-xml/temp/SearchRequest.xml#{config_hash['JIRA_URL']}"
+      issue_list_url = "https://jira.dev.bbc.co.uk/secure/IssueNavigator.jspa#{config_hash['JIRA_URL']}"
 
-      puts "getting url \n #{issue_list_xml_url}"
+      puts "getting url #{issue_list_xml_url} \n "
 
       xml_feed = %x{#{command} #{issue_list_xml_url}}
-      #xml_feed = "/Users/adamsr03/github/local/Knowlearn-AppDashboard/data/pipeline.xml"
       xml_obj = XmlSimple.xml_in(xml_feed)
 
       keys = Array.new

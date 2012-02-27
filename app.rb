@@ -6,11 +6,17 @@ $:.unshift File.join(File.dirname(Pathname.new($0).realpath.to_s), 'lib')
 require 'jiraissues'
 require 'date'
 require 'json'
+require 'yaml'
 
 $debug = false
 
 puts "Building KandL Pipeline Status"
-issue_list = Jiraissues.fetch_issues 
+
+config_data = YAML.load_file  ('config.yaml')
+
+
+
+issue_list = Jiraissues.fetch_issues(config_data) 
 
 puts issue_list if $debug
 
