@@ -51,4 +51,6 @@ File.open(filename, 'w') do |f|
   f.write report
   f.write "<script>var issues_json = " + issue_list.to_json
   f.write("</script></div></body></html>")
-end
+end 
+
+browser = %x{open output/pipeline.html}
