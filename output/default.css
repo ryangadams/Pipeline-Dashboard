@@ -1,17 +1,35 @@
 #wrapper{width:95%;margin:0px auto;}
-table{margin:0px auto;}
+table{margin:0px auto;width:100%;}
 tr{vertical-align:top;}
 td, th{padding:2px;margin:0px;}
 th{text-decoration:underline;}
 .Green td:nth-child(6){background-color:#008800;color:#fff;}
 .Amber td:nth-child(6){background-color:#EFA906;color:#fff;}
 .Red td:nth-child(6){background-color:#cc0033;color:#fff;}
-.Closed{text-decoration: line-through;}
+.Closed{text-decoration: line-through;} 
+
+tr{width:100%;}
+td.summary{min-width:45%;}
 
 .hide-closed .Closed{display:none;}
 thead th:hover, td.summary:hover{cursor:pointer; background-color:#dedede;}
 
 tr.even{background-color: #F0F0F6;}
 
-span.hidden{display:none;}
+tr.hidden, span.hidden{display:none;}
 .show-snippet span.hidden{display:block;margin:10px 2px;background:#fff;padding:10px;max-width:400px;}
+                      
+#graph {                         
+    border-color: #DDDDDD;
+    border-style: solid;
+    border-width: 0 1px;
+    margin: 10px auto;
+    overflow: hidden;
+    width: 95%;}
+#graph div{text-align:center;padding:2px 0px;}
+#graph-concept{background:red;color:#fff;}
+#graph-feasibility{background:orange;color:#000;}
+#graph-discovery{background:yellow;color:#000;}
+#graph-build{background:green;color:#fff;}
+#graph-run{background:blue;color:#fff;}
+#graph-unknown{background:indigo;color:#fff;}
