@@ -63,7 +63,7 @@ function addEvents() {
         }, 
         format: function(s) { 
             // format your data for normalization 
-            return s.toLowerCase().replace(/concept/,0).replace(/feasibility/,1).replace(/discovery/,2).replace(/build/,3).replace(/run/,4).replace(/^$/,5); 
+            return s.toLowerCase().replace(/concept/,0).replace(/feasibility/,1).replace(/discovery/,2).replace(/build/,3).replace(/run/,4).replace(/^unknown$/,5); 
         }, 
         // set type, either numeric or text 
         type: 'numeric' 
