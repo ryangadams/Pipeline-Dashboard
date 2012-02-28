@@ -130,7 +130,9 @@ function addEvents() {
             $(this).text("Show Closed Projects");
         }
         $("body").toggleClass("hide-closed");
-    });
+    });                                  
+		// hide closed by default
+		$("#toggle-closed-projects").click();
  		$("#graph div").hover(
 			function(){
 	  	$(this).css('cursor', 'pointer');
@@ -140,37 +142,37 @@ function addEvents() {
 			}
 		).click(function(e){                  
 			status = $(this).attr("id").split("-")[1];
-			$("#project-table tr").removeClass("hidden");
-			$("#project-table tr:not('." + status + "')").addClass("hidden");
+			$("#project-table tbody tr").removeClass("hidden");
+			$("#project-table tbody tr").not('.' + status).addClass("hidden");
 		});     
-    $("#graph p a").click(function(e){
+    $("#graph a").click(function(e){
 			e.preventDefault();
-			$("#project-table tr").removeClass("hidden");
+			$("#project-table tbody tr").removeClass("hidden");
 		});
 }
 
 function buildGraph() { 
 	var columnOrder = ["concept", "feasibility", "discovery", "build", "run", "unknown"];
 	var columns = [];
-	var projectCount = 0;
-	$("table tr").each(function(index, element){
-		lifecycleStatus = $(this).find("td:nth-child(4)").text().toLowerCase();
-		if(lifecycleStatus != "") {
+	var projectCount = $('#project-table tbody tr:not(".Closed")').length;
+	$("table tbody tr").each(function(index, element){
+		lifecycleStatus = $(this).find("td:nth-child(4)").text().toLowerCase(); 
+		pipelineStatus =  $(this).find("td:nth-child(3)").text().toLowerCase(); 
+		if(lifecycleStatus != "" && pipelineStatus != 'closed') {
 			(columns[lifecycleStatus] == undefined) ? columns[lifecycleStatus] = 1 : columns[lifecycleStatus]++;
-		} else {                                                                                              
+		} else if(lifecycleStatus == "" && pipelineStatus != 'closed') {
 			lifecycleStatus = "unknown";
 			(columns[lifecycleStatus] == undefined) ? columns[lifecycleStatus] = 1 : columns[lifecycleStatus]++;
 		}       
-		projectCount = index + 1;
 	});                     
 	var thisWidth = 0;
 	var thatWidth = 0;
-	var graph = $('<div id="graph"><p>Pipeline Overview </p></div>');
+	var graph = $('<div id="graph"><h2>Pipeline Overview</h2><p>Does not include "Closed" Projects. Click a status to filter the list below.</p></div>');
 	$.each(columnOrder, function(index, value){         
 		thatWidth = thatWidth + thisWidth;                 
 		thisWidth = (columns[value] / projectCount * 100);
 		graph.append('<div id="graph-'+value +'" style="width:' + thisWidth + '%;margin-left:' + thatWidth + '%;">' + value + ' ('+ columns[value] +')</div>');
 	});                                                              
 	$("table").before(graph);  
-	$("#graph p").append('<a href="#">Show All</a>');
+	$("#graph").append('<a href="#">Show All</a>');
 }
