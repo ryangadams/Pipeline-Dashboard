@@ -17,8 +17,8 @@ thead th:hover, td.summary:hover{cursor:pointer; background-color:#dedede;}
 
 tr.even{background-color: #F0F0F6;}
 
-tr.hidden, span.hidden{display:none;}
-.show-snippet span.hidden{display:block;margin:10px 2px;background:#fff;padding:10px;max-width:400px;}
+tr.hidden, div.hidden{display:none;}
+.show-snippet div.hidden{display:block;margin:10px 2px;background:#fff;padding:10px;max-width:400px;}
                       
 #graph {                         
     border-color: #DDDDDD;
@@ -35,3 +35,7 @@ tr.hidden, span.hidden{display:none;}
 #graph-build{background:green;color:#fff;}
 #graph-run{background:blue;color:#fff;}
 #graph-unknown{background:indigo;color:#fff;}
+
+.comment-created-date, .comment{background:#EFC96a;padding:0px 10px;margin:0px;}
+.comment-created-date:before{content: "Last Comment & Date - "; }
+.comment p{margin:0px;}

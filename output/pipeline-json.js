@@ -15,7 +15,7 @@ function buildHTML(){
         var el = $('<tr id="row_' + index + '" ' + 
 				'class="' + value.rag + ' ' + value.status + ' ' + value.lifecycle.toLowerCase() + '">' +
         '<td><a href="https://jira.dev.bbc.co.uk/browse/' +value.key +'">' + value.key + '</a></td>' +
-        '<td class="summary">' + value.summary + '<span class="hidden">' + value.laststatus  + '</span></td>' +
+        '<td class="summary">' + value.summary + '<div class="hidden">' + value.laststatus  + value.lastcomment + '</div></td>' +
         '<td>' + value.status + '</td>' +
         '<td>' + value.lifecycle + '</td>' +
         '<td>' + value.tpm + '</td>' +
@@ -34,6 +34,10 @@ function buildHTML(){
         tableBody.append(el);
     });
     $("#wrapper").append('<p><a href="' + issues_json.url + '">View List on JIRA</a></p>').append(table);
+    
+    $(".comment-created-date").each(function(el){
+    	$(this).text($(this).text().split("+")[0]);
+    });
 	  
 	buildGraph();
     addEvents();
