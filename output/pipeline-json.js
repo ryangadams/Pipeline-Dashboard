@@ -158,6 +158,9 @@ function addEvents() {
 function buildGraph() { 
 	var columnOrder = ["concept", "feasibility", "discovery", "build", "run", "unknown"];
 	var columns = [];
+	for (var i=0;i<columnOrder.length;i++) {
+		columns[columnOrder[i]] = 0;
+	}
 	var projectCount = $('#project-table tbody tr:not(".Closed")').length;
 	$("table tbody tr").each(function(index, element){
 		lifecycleStatus = $(this).find("td:nth-child(4)").text().toLowerCase(); 
